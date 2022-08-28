@@ -3,7 +3,7 @@ let tilesObject = document.querySelector('.tiles');
 let selectedTile;
 let colorSelector = document.querySelector('.optionsRemove');
 const windowSize = 10;
-
+let colorInput=document.querySelector('#color');
 
 let updateSelectedTile = tile => {
     if (selectedTile != null){
@@ -35,6 +35,10 @@ let addBorder = tile => {
         updateSelectedTile(tile);
     })
 }
+
+document.querySelector('.submit').addEventListener('click', ()=>{
+    selectedTile.style.backgroundColor=colorInput.value;
+})
 
 createTiles();
 
