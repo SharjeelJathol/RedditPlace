@@ -28,3 +28,12 @@ body {
     border-style: solid;
 }
 
+.options {
+    position: fixed;
+    left: 40%;
+}
+
+.optionsRemove {
+    display: none;
+}
+
