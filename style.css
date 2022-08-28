@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+
+body {
+    display: flex;
+}
+
+.tiles {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tile {
+    background-color: aqua;
+    height: 20vmin;
+    width: 20vmin;
+    border-color: black;
+    border-style: solid;
+}
+
+.border{
+    border: 1px;
+    border-color: white;
+    border-style: solid;
+}
+
