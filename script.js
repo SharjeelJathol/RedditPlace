@@ -1,3 +1,6 @@
+// const socket = io("http://localhost");
+const socket=io('http://localhost:3000')
+
 let tiles;
 let tilesObject = document.querySelector('.tiles');
 let selectedTile;
@@ -22,7 +25,7 @@ let updateSelectedTile = tile => {
 let createTiles = () => {
     const totalTiles = Math.pow(windowSize, 2);
     for (let i = 0; i < totalTiles; i++)
-        tilesObject.innerHTML += '<button class="tile"></button>'
+        tilesObject.innerHTML += `<button class="tile" id="${i}"></button>`
     //get values from updated tiles
     tiles = document.querySelectorAll('.tile');
     //add event listener to those tiles
@@ -37,7 +40,12 @@ let addBorder = tile => {
 }
 
 document.querySelector('.submit').addEventListener('click', ()=>{
-    selectedTile.style.backgroundColor=colorInput.value;
+    socket.emit('update', {id:selectedTile.attributes.id.value
+    , color:colorInput.value});
+})
+
+socket.on('change', obj=>{
+    tiles[obj.id].style.backgroundColor=obj.color;
 })
 
 createTiles();
