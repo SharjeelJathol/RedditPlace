@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+let socketsUsed=new Array();
 const http = require('http');
 const server = http.createServer(app);
 const {
@@ -27,7 +28,12 @@ io.on('connection', (socket) => {
     })
 
     socket.on('update', obj=>{
-        io.emit('change', obj);
+        if(socketsUsed.includes(socket));
+        else{
+            io.emit('change', obj);
+            socketsUsed.push(socket);
+            setTimeout(()=>socketsUsed.shift(), 10000)
+        }
         console.log(obj)
     })
 
