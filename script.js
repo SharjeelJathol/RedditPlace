@@ -5,8 +5,8 @@ let tiles;
 let tilesObject = document.querySelector('.tiles');
 let selectedTile;
 let colorSelector = document.querySelector('.optionsRemove');
-const windowSize = 10;
 let colorInput=document.querySelector('#color');
+let windowSize;
 
 let updateSelectedTile = tile => {
     if (selectedTile != null){
@@ -22,12 +22,23 @@ let updateSelectedTile = tile => {
     })
 }
 
+let updateTiles=()=>{
+    fetch('http://localhost:3000/api/tiles').then((response) => {
+        return response.json()
+    }).then(data => {
+        data.forEach((color, index) => {
+            tiles[index].style.backgroundColor = color;
+        });
+    }) 
+}
+
 let createTiles = () => {
     const totalTiles = Math.pow(windowSize, 2);
     for (let i = 0; i < totalTiles; i++)
         tilesObject.innerHTML += `<button class="tile" id="${i}"></button>`
     //get values from updated tiles
     tiles = document.querySelectorAll('.tile');
+    updateTiles();
     //add event listener to those tiles
     for (let i = 0; i < tiles.length; i++)
         addBorder(tiles[i])
@@ -48,7 +59,14 @@ socket.on('change', obj=>{
     tiles[obj.id].style.backgroundColor=obj.color;
 })
 
-createTiles();
+fetch('http://localhost:3000/api/windowSize').then((response) => {
+    return response.json();
+}).then(data => {
+    windowSize = data.windowSize;
+    createTiles();
+})
+
+
 
 
 
