@@ -1,20 +1,19 @@
 // const socket = io("http://localhost");
-const socket=io('http://localhost:3000')
+const socket = io('http://localhost:3000')
 
 let tiles;
 let tilesObject = document.querySelector('.tiles');
 let selectedTile;
 let colorSelector = document.querySelector('.optionsRemove');
-let colorInput=document.querySelector('#color');
 let windowSize;
+let colorInput = document.querySelector('#color');
 
 let updateSelectedTile = tile => {
-    if (selectedTile != null){
+    if (selectedTile != null) {
         selectedTile.classList.remove('border');
         colorSelector.classList.replace('options', 'optionsRemove');
         addBorder(selectedTile)
     }
-    
     selectedTile = tile;
     selectedTile.classList.add('border');
     selectedTile.addEventListener('click', () => {
@@ -50,13 +49,15 @@ let addBorder = tile => {
     })
 }
 
-document.querySelector('.submit').addEventListener('click', ()=>{
-    socket.emit('update', {id:selectedTile.attributes.id.value
-    , color:colorInput.value});
+document.querySelector('.submit').addEventListener('click', () => {
+    socket.emit('update', {
+        id: selectedTile.attributes.id.value,
+        color: colorInput.value
+    });
 })
 
-socket.on('change', obj=>{
-    tiles[obj.id].style.backgroundColor=obj.color;
+socket.on('change', obj => {
+    tiles[obj.id].style.backgroundColor = obj.color;
 })
 
 fetch('http://localhost:3000/api/windowSize').then((response) => {

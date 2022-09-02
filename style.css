@@ -15,7 +15,7 @@ body {
 }
 
 .tile {
-    background-color: aqua;
+    background-color: #00ffff;
     height: 20vmin;
     width: 20vmin;
     border-color: black;
