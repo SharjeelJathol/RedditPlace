@@ -44,6 +44,8 @@ io.on('connection', (socket) => {
         }
         console.log(obj)
     })
+    
+    socket.emit('updateTiles');
 
 });
 

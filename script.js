@@ -60,6 +60,8 @@ socket.on('change', obj => {
     tiles[obj.id].style.backgroundColor = obj.color;
 })
 
+socket.on('updateTiles', updateTiles);
+
 fetch('http://localhost:3000/api/windowSize').then((response) => {
     return response.json();
 }).then(data => {
