@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 let socketsUsed=new Array();
+const cors=require('cors')
 const windowSize=10;
 let tiles=new Array(Math.pow(windowSize, 2)).fill('#00ffff')
 const http = require('http');
